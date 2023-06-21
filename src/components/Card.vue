@@ -23,9 +23,9 @@ export default {
 
 <style scoped>
     .card-container {
-        margin: 40px;
-        height: 200px;
-        width: 125px;
+        margin: 20px;
+        height: 150px;
+        width: 100px;
         border-radius: 25px;
         display: flex;
         align-items: center;
@@ -35,9 +35,9 @@ export default {
     }
 
     .card-none {
-        margin: 40px;
-        height: 200px;
-        width: 125px;
+        margin: 20px;
+        height: 150px;
+        width: 100px;
         border-radius: 25px;
         border: 2px solid black;
         background-color: blue;

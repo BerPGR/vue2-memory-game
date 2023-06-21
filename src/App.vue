@@ -8,28 +8,61 @@
 
 <script>
 import Card from './components/Card.vue'
-
+import cards from './model/cards'
 export default {
   name: 'App',
   components: {
     Card
   },
   data: () => ({
-    cartas: [
-      {value: 0, img: require('@/assets/apple.png'), name: 'Apple'},
-      {value: 1, img: require('@/assets/bananas.png'), name: 'Banana'},
-      {value: 2, img: require('@/assets/eggplant.png'), name: 'Eggplant'},
-      {value: 3, img: require('@/assets/grape.png'), name: 'Grape'},
-      {value: 4, img: require('@/assets/lemon.png'), name: 'Lemon'},
-      {value: 5, img: require('@/assets/orange.png'), name: 'Orange'},
-      {value: 6, img: require('@/assets/pear.png'), name: 'Pear'},
-      {value: 7, img: require('@/assets/watermelon.png'), name: 'Watermelon'},
-    ]
+    cartas: []
   }),
   mounted() {
-    let repeat = 0
-    
+    this.createMemoryArray(0)
+  },
+  methods: {
+    createMemoryArray (index) {
+      let repeat = 0;
+      for (index; index<(cards.length * 2); index++) {
+        let randomCard = Math.floor(Math.random() * 8)
+        for (let j = 0; j <(cards.length *2); j++) {
+          if (cards[randomCard] == this.cartas[j]) {
+            repeat++;
+          }
+        }
+
+        if (repeat == 0) {
+          this.cartas.push(cards[randomCard])
+        }
+        if (repeat == 1) {
+          this.cartas.push(cards[randomCard])
+          repeat = 0
+        }
+        if (repeat >= 2) {
+          this.createMemoryArray(index)
+        }
+      }
+    }
   }
+  /*
+  mounted() {
+    let repeat = 0;
+    for (let i = 0; i<(cards.length * 2); i++) {
+      let randomNumber = Math.floor(Math.random() * 8)
+      
+      for(let j = 0; j<(cards.length * 2); j++) {
+        if (cards[randomNumber] == this.cartas[j])
+      }
+      if (repeat == 0) {
+        this.cartas[i] = cards[randomNumber]
+      }
+      if (repeat == 1) {
+        this.cartas[i] = cards[randomNumber]
+        repeat = 0
+      }
+    }
+  }
+  */
 }
 </script>
 
@@ -50,7 +83,7 @@ export default {
 .memory-container {
   display: flex;
   justify-content: center;
-  padding: 0 100px;
+  padding: 0 80px;
   flex-wrap: wrap;
 }
 </style>
