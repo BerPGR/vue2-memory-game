@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Card :carta="cartas[2]"/>
+    <div class="memory-container">
+      <Card v-for="(card, i) in cartas" :key="i" :carta="card"/>
+    </div>
   </div>
 </template>
 
@@ -24,6 +26,10 @@ export default {
       {value: 7, img: require('@/assets/watermelon.png'), name: 'Watermelon'},
     ]
   }),
+  mounted() {
+    let repeat = 0
+    
+  }
 }
 </script>
 
@@ -39,5 +45,12 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+.memory-container {
+  display: flex;
+  justify-content: center;
+  padding: 0 100px;
+  flex-wrap: wrap;
 }
 </style>

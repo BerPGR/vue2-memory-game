@@ -1,6 +1,6 @@
 <template>
-  <div class="card-container">
-    <img :src="carta.img" alt="">
+  <div :class="{'card-container': toogleCarta === true, 'card-none': toogleCarta === false}" @click="showCard">
+    <img v-if="toogleCarta===true" :src="carta.img" alt="">
   </div>
 </template>
 
@@ -10,11 +10,20 @@ export default {
     props: {
         carta: Object
     },
+    data: () => ({
+        toogleCarta: false
+    }),
+    methods: {
+        showCard () {
+            this.toogleCarta = !this.toogleCarta
+        }
+    }
 }
 </script>
 
 <style scoped>
     .card-container {
+        margin: 40px;
         height: 200px;
         width: 125px;
         border-radius: 25px;
@@ -23,6 +32,15 @@ export default {
         justify-content: center;
         border: 2px solid black;
         background-color: aqua;
+    }
+
+    .card-none {
+        margin: 40px;
+        height: 200px;
+        width: 125px;
+        border-radius: 25px;
+        border: 2px solid black;
+        background-color: blue;
     }
 
     img {
