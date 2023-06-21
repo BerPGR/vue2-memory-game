@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <Card />
+    <Card :carta="cartas[1]"/>
   </div>
 </template>
 
 <script>
 import Card from './components/Card.vue'
+import cards from './models/cards.js'
 
 export default {
   name: 'App',
   components: {
     Card
-  }
+  },
+  data: () => ({
+    cartas: []
+  }),
+  mounted() {
+    for (let carta of cards) {
+      this.cartas = [...this.cartas, carta]
+    }
+  },
 }
 </script>
 
