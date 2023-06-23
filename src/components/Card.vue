@@ -31,7 +31,6 @@ export default {
         align-items: center;
         justify-content: center;
         border: 2px solid black;
-        background-color: aqua;
     }
 
     .card-none {

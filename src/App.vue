@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div class="memory-container">
-      <Card v-for="(card, i) in cartas" :key="i" :carta="card"/>
+      <div v-for="(card, i) in cartas" :key="i">
+        <Card :carta="card"/>
+      </div>
     </div>
   </div>
 </template>
@@ -21,8 +23,35 @@ export default {
     this.createMemoryArray(0)
   },
   methods: {
-    createMemoryArray (index) {
-      let repeat = 0;
+    showCard(carta) {
+      console.log(carta);
+    },
+    checkIfRepeats (array, card) {
+      let repeat = 0
+      for (let i = 0; i<16; i++) {
+        if (array[i] === card) {
+          repeat++;
+        }
+        if (repeat >= 2) {
+          return true
+        }
+      }
+      return false
+    },
+
+    createMemoryArray() {
+      for (let i = 0; i<(cards.length*2); i++) {
+        var randomCard = Math.floor(Math.random() * 8)
+        while (this.checkIfRepeats(this.cartas, cards[randomCard])) {
+          randomCard = Math.floor(Math.random() * 8)
+        }
+        this.cartas.push(cards[randomCard])
+      }
+    }
+  }
+  /*
+  mounted() {
+    let repeat = 0;
       for (index; index<(cards.length * 2); index++) {
         let randomCard = Math.floor(Math.random() * 8)
         for (let j = 0; j <(cards.length *2); j++) {
@@ -42,26 +71,6 @@ export default {
           this.createMemoryArray(index)
         }
       }
-    }
-  }
-  /*
-  mounted() {
-    let repeat = 0;
-    for (let i = 0; i<(cards.length * 2); i++) {
-      let randomNumber = Math.floor(Math.random() * 8)
-      
-      for(let j = 0; j<(cards.length * 2); j++) {
-        if (cards[randomNumber] == this.cartas[j])
-      }
-      if (repeat == 0) {
-        this.cartas[i] = cards[randomNumber]
-      }
-      if (repeat == 1) {
-        this.cartas[i] = cards[randomNumber]
-        repeat = 0
-      }
-    }
-  }
   */
 }
 </script>
